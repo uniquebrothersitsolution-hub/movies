@@ -623,8 +623,7 @@
         const title = lastWatchedTitle?.textContent;
         const movie = allMovies.find(m => m.title === title);
         if (movie) {
-          recPromptModal.classList.remove("active");
-          getRecommendations(movie);
+          window.location.href = `recommendations.html?movie=${movie.id}`;
         }
       };
     }
