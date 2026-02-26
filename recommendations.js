@@ -126,6 +126,10 @@
                 </div>
             `;
 
+            card.addEventListener("click", () => {
+                window.location.href = `recommendations.html?movie=${movie.id}`;
+            });
+
             grid.appendChild(card);
         });
 
