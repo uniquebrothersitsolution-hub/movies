@@ -245,7 +245,15 @@
         </div>
       `;
 
-      card.addEventListener("click", () => showMovieModal(movie));
+      card.addEventListener("click", (e) => {
+        // If they clicked the recommendation button specifically
+        if (e.target.closest(".overlay-btn")) {
+          e.stopPropagation();
+          window.location.href = `recommendations.html?movie=${movie.id}`;
+          return;
+        }
+        showMovieModal(movie);
+      });
       movieGrid.appendChild(card);
     });
   }
@@ -640,17 +648,17 @@
     $$(".nav-link, .mobile-link").forEach((link) => {
       link.addEventListener("click", (e) => {
         const section = link.dataset.section;
-        if (section === "recommendations" && recSection.classList.contains("hidden")) {
+
+        if (section === "recommendations") {
+          // Since we moved to a separate page, we don't have an in-page section anymore.
+          // If the user clicks this, we can either scroll to explore or just do nothing.
+          // Let's scroll to explore for now, or the user can remove the link.
           e.preventDefault();
-          // scroll to explore instead
           exploreSection.scrollIntoView({ behavior: "smooth" });
         }
+
         if (section === "explore") {
-          // Make sure explore is visible
-          if (exploreSection.classList.contains("hidden")) {
-            recSection.classList.add("hidden");
-            exploreSection.classList.remove("hidden");
-          }
+          exploreSection.scrollIntoView({ behavior: "smooth" });
         }
       });
     });

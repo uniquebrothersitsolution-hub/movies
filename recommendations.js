@@ -130,6 +130,23 @@
         });
 
         $("#resultsCount").textContent = `${scored.length} Personalized Recommendations`;
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = $("#mobileMenuBtn");
+        const mobileMenu = $("#mobileMenu");
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener("click", () => {
+                mobileMenuBtn.classList.toggle("active");
+                mobileMenu.classList.toggle("active");
+            });
+
+            mobileMenu.querySelectorAll(".mobile-link").forEach(link => {
+                link.addEventListener("click", () => {
+                    mobileMenuBtn.classList.remove("active");
+                    mobileMenu.classList.remove("active");
+                });
+            });
+        }
     }
 
     document.addEventListener("DOMContentLoaded", init);
