@@ -1,269 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CineMatch — Smart Movie Recommendations</title>
-  <meta name="description" content="AI-powered movie recommendation system that uses content-based filtering to suggest movies based on your preferences across genres and languages.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMatch — Smart Movie Recommendations</title>
+    <meta name="description"
+        content="AI-powered movie recommendation system that uses content-based filtering to suggest movies based on your preferences across genres and languages.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav id="navbar">
-    <div class="nav-container">
-      <a href="#" class="logo" id="logo">
-        <span class="logo-icon">🎬</span>
-        <span class="logo-text">Cine<span class="logo-accent">Match</span></span>
-      </a>
-      <div class="nav-links">
-        <a href="#hero" class="nav-link active" data-section="hero">Home</a>
-        <a href="#how-it-works" class="nav-link" data-section="how-it-works">How It Works</a>
-        <a href="#explore" class="nav-link" data-section="explore">Explore</a>
-        <a href="#recommendations" class="nav-link" data-section="recommendations">Recommendations</a>
-      </div>
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+    <!-- ===== NAVBAR ===== -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" id="logo">
+                <span class="logo-icon">🎬</span>
+                <span class="logo-text">Cine<span class="logo-accent">Match</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link active" data-section="hero">Home</a>
+                <a href="#how-it-works" class="nav-link" data-section="how-it-works">How It Works</a>
+                <a href="#explore" class="nav-link" data-section="explore">Explore</a>
+                <a href="#recommendations" class="nav-link" data-section="recommendations">Recommendations</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+                <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                </svg>
+            </button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#hero" class="mobile-link" data-section="hero">Home</a>
+        <a href="#how-it-works" class="mobile-link" data-section="how-it-works">How It Works</a>
+        <a href="#explore" class="mobile-link" data-section="explore">Explore</a>
+        <a href="#recommendations" class="mobile-link" data-section="recommendations">Recommendations</a>
     </div>
-  </nav>
 
-  <!-- ===== MOBILE MENU ===== -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#hero" class="mobile-link" data-section="hero">Home</a>
-    <a href="#how-it-works" class="mobile-link" data-section="how-it-works">How It Works</a>
-    <a href="#explore" class="mobile-link" data-section="explore">Explore</a>
-    <a href="#recommendations" class="mobile-link" data-section="recommendations">Recommendations</a>
-  </div>
+    <!-- ===== HERO SECTION ===== -->
+    <section id="hero" class="hero-section">
+        <div class="hero-bg-effects">
+            <div class="hero-gradient-orb orb-1"></div>
+            <div class="hero-gradient-orb orb-2"></div>
+            <div class="hero-gradient-orb orb-3"></div>
+            <div class="hero-particles" id="heroParticles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>Data Mining • Content-Based Filtering</span>
+            </div>
+            <h1 class="hero-title">
+                Discover Your Next<br>
+                <span class="gradient-text">Favorite Movie</span>
+            </h1>
+            <p class="hero-subtitle">
+                An intelligent recommendation engine that analyzes genres, directors, cast, and language preferences
+                to deliver personalized movie suggestions — powered by content-based filtering algorithms.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="statMovies">60+</span>
+                    <span class="stat-label">Movies</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Languages</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Genres</span>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="#explore" class="btn btn-primary" id="heroExploreBtn">
+                    <span>Explore Movies</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary" id="heroLearnBtn">
+                    <span>How It Works</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
 
-  <!-- ===== HERO SECTION ===== -->
-  <section id="hero" class="hero-section">
-    <div class="hero-bg-effects">
-      <div class="hero-gradient-orb orb-1"></div>
-      <div class="hero-gradient-orb orb-2"></div>
-      <div class="hero-gradient-orb orb-3"></div>
-      <div class="hero-particles" id="heroParticles"></div>
+    <!-- ===== HOW IT WORKS SECTION ===== -->
+    <section id="how-it-works" class="section how-it-works-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">The Algorithm</span>
+                <h2 class="section-title">How Content-Based Filtering Works</h2>
+                <p class="section-subtitle">Our recommendation engine uses a similarity scoring algorithm to find movies
+                    that match your taste.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card" data-step="01">
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4" />
+                        </svg>
+                    </div>
+                    <h3>Select a Movie</h3>
+                    <p>Pick a movie you love from our collection. Browse by genre or language to find it quickly.</p>
+                </div>
+                <div class="step-card" data-step="02">
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <h3>Feature Extraction</h3>
+                    <p>The algorithm extracts key features — genres, director, cast, and language — to build a content
+                        profile.</p>
+                </div>
+                <div class="step-card" data-step="03">
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <h3>Similarity Scoring</h3>
+                    <p>Each movie is scored based on how many features it shares with your selection using weighted
+                        matching.</p>
+                </div>
+                <div class="step-card" data-step="04">
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                    </div>
+                    <h3>Top Recommendations</h3>
+                    <p>Movies are ranked by similarity score and the top results are presented as your personalized
+                        picks.</p>
+                </div>
+            </div>
+            <!-- Algorithm Visualization -->
+            <div class="algo-visual">
+                <div class="algo-card">
+                    <h4>Similarity Score Formula</h4>
+                    <div class="formula-block">
+                        <code>Score = (Genre_Match × 3) + (Director_Match × 4) + (Cast_Match × 2) + (Language_Match × 1)</code>
+                    </div>
+                    <p class="formula-desc">Higher weights are given to director match (4×) and genre overlap (3×), as
+                        these are the strongest indicators of content similarity. The score is then normalized to a
+                        0–100% match percentage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPLORE SECTION ===== -->
+    <section id="explore" class="section explore-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Browse Collection</span>
+                <h2 class="section-title">Explore Movies</h2>
+                <p class="section-subtitle">Filter by genre and language, then click on a movie to get instant
+                    recommendations.</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-container" id="filtersContainer">
+                <div class="filter-group">
+                    <label class="filter-label">Genre</label>
+                    <div class="filter-chips" id="genreFilters">
+                        <button class="chip active" data-genre="All" id="genreAll">All</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Language</label>
+                    <div class="filter-chips" id="languageFilters">
+                        <button class="chip active" data-language="All" id="langAll">All</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Sort By</label>
+                    <div class="filter-chips" id="sortFilters">
+                        <button class="chip active" data-sort="rating" id="sortRating">Top Rated</button>
+                        <button class="chip" data-sort="year" id="sortYear">Newest</button>
+                        <button class="chip" data-sort="title" id="sortTitle">A-Z</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input type="text" class="search-input" id="searchInput"
+                    placeholder="Search movies, directors, or actors..." autocomplete="off">
+                <span class="search-count" id="searchCount"></span>
+            </div>
+
+            <!-- Movie Grid -->
+            <div class="movie-grid" id="movieGrid">
+                <!-- Movies injected by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state hidden" id="emptyState">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+                <h3>No movies found</h3>
+                <p>Try adjusting your filters or search query.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RECOMMENDATION SECTION ===== -->
+    <section id="recommendations" class="section recommendation-section hidden">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">AI Recommendations</span>
+                <h2 class="section-title">Because You Liked</h2>
+                <p class="section-subtitle" id="recSubtitle"></p>
+            </div>
+
+            <!-- Selected Movie Display -->
+            <div class="selected-movie-card" id="selectedMovieCard">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Recommendation Results -->
+            <div class="rec-results" id="recResults">
+                <!-- Populated by JS -->
+            </div>
+
+            <button class="btn btn-secondary btn-back" id="backToExplore">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                <span>Back to Explore</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🎬</span>
+                    <span class="logo-text">Cine<span class="logo-accent">Match</span></span>
+                    <p class="footer-desc">A case study in Data Mining — Content-Based Movie Recommendation System</p>
+                </div>
+                <div class="footer-info">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li>Content-Based Filtering</li>
+                        <li>Feature Extraction</li>
+                        <li>Similarity Scoring</li>
+                        <li>Weighted Matching</li>
+                    </ul>
+                </div>
+                <div class="footer-info">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li>Action & Thriller</li>
+                        <li>Comedy & Drama</li>
+                        <li>Romance & Fantasy</li>
+                        <li>Sci-Fi & Horror</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineMatch — Data Mining Case Study</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== MOVIE DETAIL MODAL ===== -->
+    <div class="modal-overlay" id="movieModal">
+        <div class="modal-content" id="modalContent">
+            <!-- Populated by JS -->
+        </div>
     </div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        <span>Data Mining • Content-Based Filtering</span>
-      </div>
-      <h1 class="hero-title">
-        Discover Your Next<br>
-        <span class="gradient-text">Favorite Movie</span>
-      </h1>
-      <p class="hero-subtitle">
-        An intelligent recommendation engine that analyzes genres, directors, cast, and language preferences 
-        to deliver personalized movie suggestions — powered by content-based filtering algorithms.
-      </p>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number" id="statMovies">60+</span>
-          <span class="stat-label">Movies</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">5</span>
-          <span class="stat-label">Languages</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">10+</span>
-          <span class="stat-label">Genres</span>
-        </div>
-      </div>
-      <div class="hero-actions">
-        <a href="#explore" class="btn btn-primary" id="heroExploreBtn">
-          <span>Explore Movies</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#how-it-works" class="btn btn-secondary" id="heroLearnBtn">
-          <span>How It Works</span>
-        </a>
-      </div>
-    </div>
-    <div class="hero-scroll-indicator">
-      <div class="scroll-line"></div>
-      <span>Scroll to explore</span>
-    </div>
-  </section>
 
-  <!-- ===== HOW IT WORKS SECTION ===== -->
-  <section id="how-it-works" class="section how-it-works-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">The Algorithm</span>
-        <h2 class="section-title">How Content-Based Filtering Works</h2>
-        <p class="section-subtitle">Our recommendation engine uses a similarity scoring algorithm to find movies that match your taste.</p>
-      </div>
-      <div class="steps-grid">
-        <div class="step-card" data-step="01">
-          <div class="step-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4"/></svg>
-          </div>
-          <h3>Select a Movie</h3>
-          <p>Pick a movie you love from our collection. Browse by genre or language to find it quickly.</p>
-        </div>
-        <div class="step-card" data-step="02">
-          <div class="step-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3>Feature Extraction</h3>
-          <p>The algorithm extracts key features — genres, director, cast, and language — to build a content profile.</p>
-        </div>
-        <div class="step-card" data-step="03">
-          <div class="step-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <h3>Similarity Scoring</h3>
-          <p>Each movie is scored based on how many features it shares with your selection using weighted matching.</p>
-        </div>
-        <div class="step-card" data-step="04">
-          <div class="step-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <h3>Top Recommendations</h3>
-          <p>Movies are ranked by similarity score and the top results are presented as your personalized picks.</p>
-        </div>
-      </div>
-      <!-- Algorithm Visualization -->
-      <div class="algo-visual">
-        <div class="algo-card">
-          <h4>Similarity Score Formula</h4>
-          <div class="formula-block">
-            <code>Score = (Genre_Match × 3) + (Director_Match × 4) + (Cast_Match × 2) + (Language_Match × 1)</code>
-          </div>
-          <p class="formula-desc">Higher weights are given to director match (4×) and genre overlap (3×), as these are the strongest indicators of content similarity. The score is then normalized to a 0–100% match percentage.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== EXPLORE SECTION ===== -->
-  <section id="explore" class="section explore-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Browse Collection</span>
-        <h2 class="section-title">Explore Movies</h2>
-        <p class="section-subtitle">Filter by genre and language, then click on a movie to get instant recommendations.</p>
-      </div>
-
-      <!-- Filters -->
-      <div class="filters-container" id="filtersContainer">
-        <div class="filter-group">
-          <label class="filter-label">Genre</label>
-          <div class="filter-chips" id="genreFilters">
-            <button class="chip active" data-genre="All" id="genreAll">All</button>
-          </div>
-        </div>
-        <div class="filter-group">
-          <label class="filter-label">Language</label>
-          <div class="filter-chips" id="languageFilters">
-            <button class="chip active" data-language="All" id="langAll">All</button>
-          </div>
-        </div>
-        <div class="filter-group">
-          <label class="filter-label">Sort By</label>
-          <div class="filter-chips" id="sortFilters">
-            <button class="chip active" data-sort="rating" id="sortRating">Top Rated</button>
-            <button class="chip" data-sort="year" id="sortYear">Newest</button>
-            <button class="chip" data-sort="title" id="sortTitle">A-Z</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Search Bar -->
-      <div class="search-container">
-        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" class="search-input" id="searchInput" placeholder="Search movies, directors, or actors..." autocomplete="off">
-        <span class="search-count" id="searchCount"></span>
-      </div>
-
-      <!-- Movie Grid -->
-      <div class="movie-grid" id="movieGrid">
-        <!-- Movies injected by JS -->
-      </div>
-
-      <!-- Empty State -->
-      <div class="empty-state hidden" id="emptyState">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-        <h3>No movies found</h3>
-        <p>Try adjusting your filters or search query.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== RECOMMENDATION SECTION ===== -->
-  <section id="recommendations" class="section recommendation-section hidden" >
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">AI Recommendations</span>
-        <h2 class="section-title">Because You Liked</h2>
-        <p class="section-subtitle" id="recSubtitle"></p>
-      </div>
-      
-      <!-- Selected Movie Display -->
-      <div class="selected-movie-card" id="selectedMovieCard">
-        <!-- Populated by JS -->
-      </div>
-
-      <!-- Recommendation Results -->
-      <div class="rec-results" id="recResults">
-        <!-- Populated by JS -->
-      </div>
-      
-      <button class="btn btn-secondary btn-back" id="backToExplore">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span>Back to Explore</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer id="footer" class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <span class="logo-icon">🎬</span>
-          <span class="logo-text">Cine<span class="logo-accent">Match</span></span>
-          <p class="footer-desc">A case study in Data Mining — Content-Based Movie Recommendation System</p>
-        </div>
-        <div class="footer-info">
-          <h4>Technology</h4>
-          <ul>
-            <li>Content-Based Filtering</li>
-            <li>Feature Extraction</li>
-            <li>Similarity Scoring</li>
-            <li>Weighted Matching</li>
-          </ul>
-        </div>
-        <div class="footer-info">
-          <h4>Categories</h4>
-          <ul>
-            <li>Action & Thriller</li>
-            <li>Comedy & Drama</li>
-            <li>Romance & Fantasy</li>
-            <li>Sci-Fi & Horror</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 CineMatch — Data Mining Case Study</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ===== MOVIE DETAIL MODAL ===== -->
-  <div class="modal-overlay" id="movieModal">
-    <div class="modal-content" id="modalContent">
-      <!-- Populated by JS -->
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>

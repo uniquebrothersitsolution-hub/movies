@@ -36,15 +36,36 @@
   const mobileMenuBtn = $("#mobileMenuBtn");
   const mobileMenu = $("#mobileMenu");
   const heroParticles = $("#heroParticles");
+  const themeToggle = $("#themeToggle");
 
   // ===== INIT =====
   async function init() {
+    initTheme();
     await loadMovies();
     buildFilters();
     applyFilters();
     setupEventListeners();
     createParticles();
     setupScrollEffects();
+  }
+
+  // ===== THEME TOGGLE =====
+  function initTheme() {
+    const saved = localStorage.getItem("cinematch-theme");
+    if (saved === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute("data-theme");
+    if (current === "light") {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("cinematch-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("cinematch-theme", "light");
+    }
   }
 
   // ===== LOAD MOVIES =====
@@ -172,9 +193,9 @@
           </div>
           <div class="movie-card-tags">
             ${movie.genres
-              .slice(0, 2)
-              .map((g) => `<span class="movie-tag">${g}</span>`)
-              .join("")}
+          .slice(0, 2)
+          .map((g) => `<span class="movie-tag">${g}</span>`)
+          .join("")}
             <span class="movie-tag movie-lang-tag">${movie.language}</span>
           </div>
         </div>
@@ -489,6 +510,9 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
+
+    // Theme toggle
+    themeToggle.addEventListener("click", toggleTheme);
 
     // Mobile menu
     mobileMenuBtn.addEventListener("click", () => {

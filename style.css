@@ -11,26 +11,26 @@
   --bg-tertiary: #1a1a28;
   --bg-card: #161622;
   --bg-card-hover: #1e1e30;
-  
+
   /* Accent Gradient */
   --accent-1: #8b5cf6;
   --accent-2: #6366f1;
   --accent-3: #a78bfa;
   --accent-glow: rgba(139, 92, 246, 0.3);
-  
+
   /* Secondary Accent */
   --cyan: #22d3ee;
   --cyan-glow: rgba(34, 211, 238, 0.2);
-  
+
   /* Text */
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  
+
   /* Borders */
   --border: rgba(255, 255, 255, 0.06);
   --border-hover: rgba(139, 92, 246, 0.3);
-  
+
   /* Misc */
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -38,17 +38,46 @@
   --radius-xl: 24px;
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
   --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.15);
-  
+
   /* Font */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', sans-serif;
-  
+
   /* Sizing */
   --nav-height: 72px;
 }
 
+/* ===== LIGHT MODE VARIABLES ===== */
+[data-theme="light"] {
+  --bg-primary: #f8f9fc;
+  --bg-secondary: #f0f1f5;
+  --bg-tertiary: #e4e6ed;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f5fa;
+
+  --accent-1: #7c3aed;
+  --accent-2: #6366f1;
+  --accent-3: #7c3aed;
+  --accent-glow: rgba(124, 58, 237, 0.15);
+
+  --cyan: #0891b2;
+  --cyan-glow: rgba(8, 145, 178, 0.1);
+
+  --text-primary: #1e1e2e;
+  --text-secondary: #4a4a68;
+  --text-muted: #7a7a96;
+
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(124, 58, 237, 0.3);
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.08);
+}
+
 /* ===== RESET ===== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -114,9 +143,18 @@ button {
   transition: background 0.3s, box-shadow 0.3s;
 }
 
+[data-theme="light"] #navbar {
+  background: rgba(248, 249, 252, 0.85);
+}
+
 #navbar.scrolled {
   background: rgba(10, 10, 15, 0.95);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] #navbar.scrolled {
+  background: rgba(248, 249, 252, 0.95);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
 }
 
 .nav-container {
@@ -174,6 +212,60 @@ button {
   color: var(--accent-3);
 }
 
+/* Theme Toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.theme-toggle:hover {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: var(--border-hover);
+  color: var(--accent-3);
+  transform: rotate(15deg);
+}
+
+.theme-icon {
+  position: absolute;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Dark mode: show sun, hide moon */
+.sun-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.moon-icon {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+
+/* Light mode: show moon, hide sun */
+[data-theme="light"] .sun-icon {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+[data-theme="light"] .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+[data-theme="light"] .theme-toggle {
+  background: rgba(0, 0, 0, 0.05);
+}
+
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
@@ -214,6 +306,10 @@ button {
   padding: 24px;
   border-bottom: 1px solid var(--border);
   z-index: 999;
+}
+
+[data-theme="light"] .mobile-menu {
+  background: rgba(248, 249, 252, 0.98);
 }
 
 .mobile-menu.active {
@@ -287,9 +383,19 @@ button {
 }
 
 @keyframes float-orb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
 }
 
 .hero-particles {
@@ -308,9 +414,19 @@ button {
 }
 
 @keyframes particle-float {
-  0% { opacity: 0; transform: translateY(0); }
-  50% { opacity: 0.6; }
-  100% { opacity: 0; transform: translateY(-200px); }
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
 }
 
 .hero-content {
@@ -344,8 +460,17 @@ button {
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.5); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
 }
 
 .hero-title {
@@ -368,8 +493,15 @@ button {
 }
 
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .hero-subtitle {
@@ -483,13 +615,29 @@ button {
 }
 
 @keyframes scroll-pulse {
-  0%, 100% { opacity: 1; height: 40px; }
-  50% { opacity: 0.3; height: 25px; }
+
+  0%,
+  100% {
+    opacity: 1;
+    height: 40px;
+  }
+
+  50% {
+    opacity: 0.3;
+    height: 25px;
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== SECTIONS COMMON ===== */
@@ -1158,8 +1306,15 @@ button {
 }
 
 @keyframes modalIn {
-  from { opacity: 0; transform: scale(0.95) translateY(20px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .modal-poster-container {
