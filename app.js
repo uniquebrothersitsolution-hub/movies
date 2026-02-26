@@ -35,6 +35,8 @@
   const navbar = $("#navbar");
   const mobileMenuBtn = $("#mobileMenuBtn");
   const mobileMenu = $("#mobileMenu");
+  const mobileMenuBackdrop = $("#mobileMenuBackdrop");
+  const mobileCloseBtn = $("#mobileCloseBtn");
   const heroParticles = $("#heroParticles");
   const themeToggle = $("#themeToggle");
 
@@ -612,17 +614,20 @@
     }
 
     // Mobile menu
-    mobileMenuBtn.addEventListener("click", () => {
-      mobileMenuBtn.classList.toggle("active");
-      mobileMenu.classList.toggle("active");
-    });
+    const toggleMenu = (show) => {
+      mobileMenuBtn.classList.toggle("active", show);
+      mobileMenu.classList.toggle("active", show);
+      mobileMenuBackdrop.classList.toggle("active", show);
+      document.body.style.overflow = show ? "hidden" : "";
+    };
+
+    mobileMenuBtn.addEventListener("click", () => toggleMenu(true));
+    mobileCloseBtn.addEventListener("click", () => toggleMenu(false));
+    mobileMenuBackdrop.addEventListener("click", () => toggleMenu(false));
 
     // Mobile links
     mobileMenu.querySelectorAll(".mobile-link").forEach((link) => {
-      link.addEventListener("click", () => {
-        mobileMenuBtn.classList.remove("active");
-        mobileMenu.classList.remove("active");
-      });
+      link.addEventListener("click", () => toggleMenu(false));
     });
 
     // Rec Prompt Actions

@@ -30,8 +30,71 @@
 
             renderSourceMovie();
             getAndRenderRecommendations();
+            initTheme();
+            displayUserInfo();
+            setupRecommendationsListeners();
         } catch (err) {
             console.error(err);
+        }
+    }
+
+    // ===== THEME TOGGLE =====
+    function initTheme() {
+        const saved = localStorage.getItem("cinematch-theme");
+        if (saved === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+        }
+    }
+
+    function toggleTheme() {
+        const current = document.documentElement.getAttribute("data-theme");
+        if (current === "light") {
+            document.documentElement.removeAttribute("data-theme");
+            localStorage.setItem("cinematch-theme", "dark");
+        } else {
+            document.documentElement.setAttribute("data-theme", "light");
+            localStorage.setItem("cinematch-theme", "light");
+        }
+    }
+
+    // ===== USER INFO =====
+    function displayUserInfo() {
+        const authData = JSON.parse(localStorage.getItem("cinematch-auth"));
+        const navProfile = $("#navProfile");
+        const navUserName = $("#navUserName");
+        const userAvatar = $("#userAvatar");
+
+        if (authData && navProfile) {
+            navProfile.classList.remove("hidden");
+            navUserName.textContent = authData.name;
+            userAvatar.textContent = authData.name.charAt(0).toUpperCase();
+        }
+    }
+
+    function setupRecommendationsListeners() {
+        const themeToggle = $("#themeToggle");
+        if (themeToggle) themeToggle.addEventListener("click", toggleTheme);
+
+        const mobileMenuBtn = $("#mobileMenuBtn");
+        const mobileMenu = $("#mobileMenu");
+        const mobileMenuBackdrop = $("#mobileMenuBackdrop");
+        const mobileCloseBtn = $("#mobileCloseBtn");
+
+        const toggleMenu = (show) => {
+            mobileMenuBtn.classList.toggle("active", show);
+            mobileMenu.classList.toggle("active", show);
+            mobileMenuBackdrop.classList.toggle("active", show);
+            document.body.style.overflow = show ? "hidden" : "";
+        };
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener("click", () => toggleMenu(true));
+        if (mobileCloseBtn) mobileCloseBtn.addEventListener("click", () => toggleMenu(false));
+        if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener("click", () => toggleMenu(false));
+
+        if (mobileMenu) {
+            mobileMenu.querySelectorAll(".mobile-link").forEach(link => {
+                link.addEventListener("click", () => toggleMenu(false));
+            });
         }
     }
 
@@ -134,23 +197,6 @@
         });
 
         $("#resultsCount").textContent = `${scored.length} Personalized Recommendations`;
-
-        // Mobile Menu Logic
-        const mobileMenuBtn = $("#mobileMenuBtn");
-        const mobileMenu = $("#mobileMenu");
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener("click", () => {
-                mobileMenuBtn.classList.toggle("active");
-                mobileMenu.classList.toggle("active");
-            });
-
-            mobileMenu.querySelectorAll(".mobile-link").forEach(link => {
-                link.addEventListener("click", () => {
-                    mobileMenuBtn.classList.remove("active");
-                    mobileMenu.classList.remove("active");
-                });
-            });
-        }
     }
 
     document.addEventListener("DOMContentLoaded", init);

@@ -89,14 +89,40 @@
 <body>
     <nav id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">
+            <a href="index.html" class="logo" id="logo">
                 <span class="logo-icon">🎬</span>
                 <span class="logo-text">Cine<span class="logo-accent">Match</span></span>
             </a>
             <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
                 <a href="index.html#explore" class="nav-link">Explore</a>
             </div>
-            <a href="index.html" class="btn btn-secondary" style="padding: 8px 16px;">Back Home</a>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
+                </button>
+                <div class="nav-profile hidden" id="navProfile">
+                    <div class="user-info">
+                        <span class="user-avatar" id="userAvatar">U</span>
+                        <span class="user-name" id="navUserName">User</span>
+                    </div>
+                </div>
+            </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
@@ -104,9 +130,20 @@
     </nav>
 
     <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
     <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html#hero" class="mobile-link">Home</a>
-        <a href="index.html#explore" class="mobile-link">Explore</a>
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎬</span>
+                <span class="logo-text">Cine<span class="logo-accent">Match</span></span>
+            </a>
+            <button class="mobile-close-btn" id="mobileCloseBtn">&times;</button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html#hero" class="mobile-link">Home</a>
+            <a href="index.html#explore" class="mobile-link">Explore</a>
+            <a href="index.html" class="mobile-link btn btn-secondary" style="margin-top: 20px;">Back Home</a>
+        </div>
     </div>
 
     <header class="rec-page-hero">
