@@ -31,16 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
-        // In a real app we'd verify password. Here we simulate success.
+        const password = document.getElementById('loginPassword').value;
 
-        const userData = {
-            name: email.split('@')[0], // Generate a name from email
-            email: email,
-            isLoggedIn: true
-        };
+        // Get users from localStorage
+        const users = JSON.parse(localStorage.getItem('cinematch-users') || '[]');
 
-        localStorage.setItem('cinematch-auth', JSON.stringify(userData));
-        window.location.href = 'index.html';
+        // Find user
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (user) {
+            const authData = {
+                name: user.name,
+                email: user.email,
+                isLoggedIn: true
+            };
+            localStorage.setItem('cinematch-auth', JSON.stringify(authData));
+            window.location.href = 'index.html';
+        } else {
+            alert('Invalid email or password. Please try again or sign up.');
+        }
     });
 
     // Handle Signup
@@ -48,14 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const name = document.getElementById('signupName').value;
         const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
 
-        const userData = {
-            name: name,
-            email: email,
-            isLoggedIn: true
-        };
+        // Get existing users
+        const users = JSON.parse(localStorage.getItem('cinematch-users') || '[]');
 
-        localStorage.setItem('cinematch-auth', JSON.stringify(userData));
+        // Check if user already exists
+        if (users.some(u => u.email === email)) {
+            alert('This email is already registered. Please login.');
+            return;
+        }
+
+        // Add new user
+        const newUser = { name, email, password };
+        users.push(newUser);
+        localStorage.setItem('cinematch-users', JSON.stringify(users));
+
+        // Auto login after signup
+        const authData = { name, email, isLoggedIn: true };
+        localStorage.setItem('cinematch-auth', JSON.stringify(authData));
         window.location.href = 'index.html';
     });
 });

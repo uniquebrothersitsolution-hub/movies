@@ -50,6 +50,12 @@
   const progressBar = $("#progressBar");
   const doneWatchingBtn = $("#doneWatchingBtn");
 
+  // Rec Prompt Refs
+  const recPromptModal = $("#recPromptModal");
+  const lastWatchedTitle = $("#lastWatchedTitle");
+  const getRecsBtn = $("#getRecsBtn");
+  const promptExploreBtn = $("#promptExploreBtn");
+
   // ===== INIT =====
   async function init() {
     if (!checkAuth()) return;
@@ -330,8 +336,9 @@
       document.body.style.overflow = "";
       doneWatchingBtn.removeEventListener("click", handleDone);
 
-      // Auto-trigger recommendations
-      getRecommendations(movie);
+      // Show recommendation prompt
+      if (lastWatchedTitle) lastWatchedTitle.textContent = movie.title;
+      if (recPromptModal) recPromptModal.classList.add("active");
     };
 
     doneWatchingBtn.addEventListener("click", handleDone);
@@ -609,6 +616,26 @@
         mobileMenu.classList.remove("active");
       });
     });
+
+    // Rec Prompt Actions
+    if (getRecsBtn) {
+      getRecsBtn.onclick = () => {
+        const title = lastWatchedTitle?.textContent;
+        const movie = allMovies.find(m => m.title === title);
+        if (movie) {
+          recPromptModal.classList.remove("active");
+          getRecommendations(movie);
+        }
+      };
+    }
+
+    if (promptExploreBtn) {
+      promptExploreBtn.onclick = () => {
+        recPromptModal.classList.remove("active");
+        exploreSection.scrollIntoView({ behavior: "smooth" });
+        updateActiveNav("explore");
+      };
+    }
 
     // Nav link clicks
     $$(".nav-link, .mobile-link").forEach((link) => {
