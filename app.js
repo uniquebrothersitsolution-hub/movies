@@ -602,7 +602,10 @@
 
     // Escape key
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") {
+        closeModal();
+        toggleMenu(false);
+      }
     });
 
     // Theme toggle
@@ -621,7 +624,12 @@
       document.body.style.overflow = show ? "hidden" : "";
     };
 
-    mobileMenuBtn.addEventListener("click", () => toggleMenu(true));
+    mobileMenuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = mobileMenu.classList.contains("active");
+      toggleMenu(!isOpen);
+    });
+
     mobileCloseBtn.addEventListener("click", () => toggleMenu(false));
     mobileMenuBackdrop.addEventListener("click", () => toggleMenu(false));
 
@@ -632,13 +640,20 @@
 
     // Rec Prompt Actions
     if (getRecsBtn) {
-      getRecsBtn.onclick = () => {
-        const title = lastWatchedTitle?.textContent;
-        const movie = allMovies.find(m => m.title === title);
+      getRecsBtn.addEventListener("click", () => {
+        const title = lastWatchedTitle?.textContent?.trim();
+        if (!title) return;
+
+        const movie = allMovies.find(m => m.title.toLowerCase() === title.toLowerCase());
         if (movie) {
           window.location.href = `recommendations.html?movie=${movie.id}`;
+        } else {
+          console.warn("Movie not found for recommendations:", title);
+          // Fallback if title match fails somehow
+          recPromptModal.classList.remove("active");
+          exploreSection.scrollIntoView({ behavior: "smooth" });
         }
-      };
+      });
     }
 
     if (promptExploreBtn) {

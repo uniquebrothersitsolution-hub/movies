@@ -87,7 +87,13 @@
             document.body.style.overflow = show ? "hidden" : "";
         };
 
-        if (mobileMenuBtn) mobileMenuBtn.addEventListener("click", () => toggleMenu(true));
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const isOpen = mobileMenu.classList.contains("active");
+                toggleMenu(!isOpen);
+            });
+        }
         if (mobileCloseBtn) mobileCloseBtn.addEventListener("click", () => toggleMenu(false));
         if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener("click", () => toggleMenu(false));
 
