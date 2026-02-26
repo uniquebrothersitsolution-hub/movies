@@ -1772,66 +1772,10 @@ button {
   justify-content: center;
 }
 
-/* ===== RECOMMENDATION PROMPT MODAL ===== */
-.rec-prompt-card {
-  background: var(--bg-card);
-  padding: 40px;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), var(--shadow-glow);
-  text-align: center;
-  max-width: 450px;
-  width: 90%;
-  animation: modalIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes modalIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.rec-prompt-icon {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
-}
-
-.rec-prompt-title {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, var(--accent-3), var(--cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.rec-prompt-text {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 32px;
-}
-
-.rec-prompt-text strong {
-  color: var(--text-primary);
-}
-
-.rec-prompt-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.rec-prompt-actions .btn {
-  width: 100%;
-  justify-content: center;
+/* ===== MOBILE MENU (Hidden by default, shown in @media) ===== */
+.mobile-menu,
+.mobile-menu-btn {
+  display: none;
 }
 
 /* ===== SCROLLBAR ===== */
