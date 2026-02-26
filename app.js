@@ -596,47 +596,51 @@
     });
 
     // Modal overlay click (close)
-    movieModal.addEventListener("click", (e) => {
-      if (e.target === movieModal) closeModal();
-    });
+    if (movieModal) {
+      movieModal.addEventListener("click", (e) => {
+        if (e.target === movieModal) closeModal();
+      });
+    }
 
     // Escape key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        closeModal();
-        toggleMenu(false);
+        if (typeof closeModal === "function") closeModal();
+        if (typeof toggleMenu === "function") toggleMenu(false);
       }
     });
 
     // Theme toggle
-    themeToggle.addEventListener("click", toggleTheme);
+    if (themeToggle) themeToggle.addEventListener("click", toggleTheme);
 
     // Logout
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", logout);
-    }
+    if (logoutBtn) logoutBtn.addEventListener("click", logout);
 
     // Mobile menu
-    const toggleMenu = (show) => {
-      mobileMenuBtn.classList.toggle("active", show);
-      mobileMenu.classList.toggle("active", show);
-      mobileMenuBackdrop.classList.toggle("active", show);
+    function toggleMenu(show) {
+      if (mobileMenuBtn) mobileMenuBtn.classList.toggle("active", show);
+      if (mobileMenu) mobileMenu.classList.toggle("active", show);
+      if (mobileMenuBackdrop) mobileMenuBackdrop.classList.toggle("active", show);
       document.body.style.overflow = show ? "hidden" : "";
-    };
+    }
 
-    mobileMenuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpen = mobileMenu.classList.contains("active");
-      toggleMenu(!isOpen);
-    });
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = mobileMenu?.classList.contains("active");
+        toggleMenu(!isOpen);
+      });
+    }
 
-    mobileCloseBtn.addEventListener("click", () => toggleMenu(false));
-    mobileMenuBackdrop.addEventListener("click", () => toggleMenu(false));
+    if (mobileCloseBtn) mobileCloseBtn.addEventListener("click", () => toggleMenu(false));
+    if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener("click", () => toggleMenu(false));
 
     // Mobile links
-    mobileMenu.querySelectorAll(".mobile-link").forEach((link) => {
-      link.addEventListener("click", () => toggleMenu(false));
-    });
+    if (mobileMenu) {
+      mobileMenu.querySelectorAll(".mobile-link").forEach((link) => {
+        link.addEventListener("click", () => toggleMenu(false));
+      });
+    }
 
     // Rec Prompt Actions
     if (getRecsBtn) {
@@ -722,6 +726,7 @@
 
   // ===== HERO PARTICLES =====
   function createParticles() {
+    if (!heroParticles) return;
     for (let i = 0; i < 30; i++) {
       const particle = document.createElement("div");
       particle.className = "particle";
