@@ -59,16 +59,17 @@
   const promptExploreBtn = $("#promptExploreBtn");
 
   // ===== INIT =====
+  initTheme();
+
   async function init() {
     if (!checkAuth()) return;
-    initTheme();
+    displayUserInfo();
     await loadMovies();
     buildFilters();
     applyFilters();
     setupEventListeners();
     createParticles();
     setupScrollEffects();
-    displayUserInfo();
   }
 
   // ===== AUTHENTICATION =====
@@ -129,7 +130,9 @@
   function buildFilters() {
     // Extract unique genres
     const genres = new Set();
-    allMovies.forEach((m) => m.genres.forEach((g) => genres.add(g)));
+    allMovies.forEach((m) => {
+      if (m.genres) m.genres.forEach((g) => genres.add(g));
+    });
     const sortedGenres = [...genres].sort();
     sortedGenres.forEach((genre) => {
       const btn = document.createElement("button");
