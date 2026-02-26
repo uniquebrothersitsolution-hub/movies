@@ -48,6 +48,17 @@
                     <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
                 </svg>
             </button>
+            <div class="nav-profile hidden" id="navProfile">
+                <div class="user-info">
+                    <span class="user-avatar" id="userAvatar">A</span>
+                    <span class="user-name" id="navUserName">User</span>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Logout">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                    </svg>
+                </button>
+            </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
@@ -318,6 +329,43 @@
     <div class="modal-overlay" id="movieModal">
         <div class="modal-content" id="modalContent">
             <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <!-- ===== MOVIE PLAYER OVERLAY ===== -->
+    <div class="player-overlay hidden" id="playerOverlay">
+        <div class="player-content">
+            <div class="player-video-container">
+                <div class="player-placeholder">
+                    <div class="loading-spinner"></div>
+                    <p>Streaming in 4K Ultra HD...</p>
+                </div>
+                <img id="playerPoster" src="" alt="Movie Poster">
+            </div>
+            <div class="player-controls">
+                <div class="player-header">
+                    <div class="player-info">
+                        <h2 id="playerTitle">Movie Title</h2>
+                        <p id="playerMeta">2024 • Action • 2h 30m</p>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+                <div class="controls-row">
+                    <div class="main-controls">
+                        <button class="control-btn pulse">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </button>
+                        <span class="time-display">01:42 / 02:30</span>
+                    </div>
+                    <button class="btn btn-primary" id="doneWatchingBtn">Done Watching</button>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -38,8 +38,21 @@
   const heroParticles = $("#heroParticles");
   const themeToggle = $("#themeToggle");
 
+  // Auth & Player Refs
+  const navProfile = $("#navProfile");
+  const navUserName = $("#navUserName");
+  const userAvatar = $("#userAvatar");
+  const logoutBtn = $("#logoutBtn");
+  const playerOverlay = $("#playerOverlay");
+  const playerTitle = $("#playerTitle");
+  const playerMeta = $("#playerMeta");
+  const playerPoster = $("#playerPoster");
+  const progressBar = $("#progressBar");
+  const doneWatchingBtn = $("#doneWatchingBtn");
+
   // ===== INIT =====
   async function init() {
+    if (!checkAuth()) return;
     initTheme();
     await loadMovies();
     buildFilters();
@@ -47,6 +60,31 @@
     setupEventListeners();
     createParticles();
     setupScrollEffects();
+    displayUserInfo();
+  }
+
+  // ===== AUTHENTICATION =====
+  function checkAuth() {
+    const authData = localStorage.getItem("cinematch-auth");
+    if (!authData) {
+      window.location.href = "login.html";
+      return false;
+    }
+    return true;
+  }
+
+  function displayUserInfo() {
+    const authData = JSON.parse(localStorage.getItem("cinematch-auth"));
+    if (authData && navProfile) {
+      navProfile.classList.remove("hidden");
+      navUserName.textContent = authData.name;
+      userAvatar.textContent = authData.name.charAt(0).toUpperCase();
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("cinematch-auth");
+    window.location.href = "login.html";
   }
 
   // ===== THEME TOGGLE =====
@@ -235,9 +273,9 @@
           ${movie.genres.map((g) => `<span class="selected-tag">${g}</span>`).join("")}
           <span class="selected-tag" style="background:rgba(34,211,238,0.1);color:var(--cyan);border-color:rgba(34,211,238,0.15)">${movie.language}</span>
         </div>
-        <button class="btn btn-primary modal-rec-btn" id="modalRecBtn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4"/></svg>
-          <span>Find Similar Movies</span>
+        <button class="btn btn-primary modal-rec-btn" id="modalWatchBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+          <span>Watch Movie</span>
         </button>
       </div>
     `;
@@ -248,16 +286,55 @@
     // Close button
     $("#modalCloseBtn").addEventListener("click", closeModal);
 
-    // Rec button
-    $("#modalRecBtn").addEventListener("click", () => {
+    // Watch button
+    $("#modalWatchBtn").addEventListener("click", () => {
       closeModal();
-      getRecommendations(movie);
+      startMovieWatch(movie);
     });
   }
 
   function closeModal() {
     movieModal.classList.remove("active");
     document.body.style.overflow = "";
+  }
+
+  // ===== MOVIE WATCH FLOW =====
+  function startMovieWatch(movie) {
+    if (!playerOverlay) return;
+
+    // Set player content
+    playerTitle.textContent = movie.title;
+    playerMeta.textContent = `${movie.year} • ${movie.genres.join(", ")} • ${movie.language}`;
+    playerPoster.src = movie.poster;
+    progressBar.style.width = "0%";
+
+    // Show player
+    playerOverlay.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    // Animate progress bar (simulated)
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 2;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+      }
+      progressBar.style.width = `${progress}%`;
+    }, 100);
+
+    // Done watching
+    const handleDone = () => {
+      clearInterval(interval);
+      playerOverlay.classList.add("hidden");
+      document.body.style.overflow = "";
+      doneWatchingBtn.removeEventListener("click", handleDone);
+
+      // Auto-trigger recommendations
+      getRecommendations(movie);
+    };
+
+    doneWatchingBtn.addEventListener("click", handleDone);
   }
 
   // ===================================================
@@ -513,6 +590,11 @@
 
     // Theme toggle
     themeToggle.addEventListener("click", toggleTheme);
+
+    // Logout
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", logout);
+    }
 
     // Mobile menu
     mobileMenuBtn.addEventListener("click", () => {
